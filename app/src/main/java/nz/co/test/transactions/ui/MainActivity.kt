@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import nz.co.test.transactions.R
 import nz.co.test.transactions.ui.navigation.Screen
+import nz.co.test.transactions.ui.navigation.TransactionDetailsRoute
 import nz.co.test.transactions.ui.navigation.TransactionsListRoute
 import nz.co.test.transactions.ui.theme.ApplicationTheme
 
@@ -33,23 +34,27 @@ class MainActivity : ComponentActivity() {
             ApplicationTheme {
                 Scaffold(
                     topBar = {
-                        val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+                        val currentRoute =
+                            navController.currentBackStackEntryAsState().value?.destination?.route
 
                         TopAppBar(
                             title = {
-                                when (currentRoute) {
-                                    Screen.TransactionsList.route -> {
+                                when {
+                                    currentRoute == Screen.TransactionsList.route -> {
                                         Text(stringResource(R.string.route_title_transactions))
                                     }
-                                    Screen.TransactionDetails.route -> {
+                                    currentRoute?.contains(Screen.TransactionDetails.route) == true -> {
                                         Text(stringResource(R.string.route_title_transaction_details))
                                     }
                                 }
                             },
                             navigationIcon = {
-                                if (currentRoute == Screen.TransactionDetails.route) {
+                                if (currentRoute?.contains(Screen.TransactionDetails.route) == true) {
                                     IconButton(onClick = { navController.popBackStack() }) {
-                                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back Button")
+                                        Icon(
+                                            Icons.AutoMirrored.Filled.ArrowBack,
+                                            contentDescription = "Back Button"
+                                        )
                                     }
                                 }
                             }
@@ -63,13 +68,22 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Screen.TransactionsList.route) {
                             TransactionsListRoute(
-                                onTransactionClick = {
-                                    // Navigate to the Transaction Details Route
+                                onTransactionClick = { transaction ->
+                                    val route =
+                                        Screen.TransactionDetails.route +
+                                                "/${transaction.id}/" +
+                                                "${transaction.transactionDate}/" +
+                                                "${transaction.summary}/" +
+                                                "${transaction.debit}/" +
+                                                "${transaction.credit}"
+                                    navController.navigate(route)
                                 }
                             )
                         }
-                        composable(Screen.TransactionDetails.route) {
-                            // Create the Transaction Details Route and show the page
+                        composable("${Screen.TransactionDetails.route}/{id}/{transactionDate}/{summary}/{debit}/{credit}") {
+                            // The Navigation parameters are automatically by
+                            // TransactionDetailsScreenViewModel through the SavedStateHandle
+                            TransactionDetailsRoute()
                         }
                     }
                 }
