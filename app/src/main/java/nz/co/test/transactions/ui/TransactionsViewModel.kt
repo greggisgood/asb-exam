@@ -42,4 +42,17 @@ class TransactionsViewModel @Inject constructor(
             }
         }
     }
+
+    /**
+     * Save the scroll position of the Transactions list, so that it can be restored upon screen
+     * recomposition or navigating back
+     *
+     * @param newScrollPosition the new scroll position
+     */
+    fun saveScrollPosition(newScrollPosition: Int) {
+        val currentScrollPosition = _uiState.value.savedScrollPosition
+        if (currentScrollPosition != newScrollPosition) {
+            _uiState.update { it.copy(savedScrollPosition = newScrollPosition) }
+        }
+    }
 }

@@ -65,15 +65,16 @@ class TransactionsViewModelTest {
     }
 
     @Test
-    fun `test that the list of sorted transactions is retrieved and saved in the UI state`() = runTest {
-        whenever(getTransactionsByDateUseCase()).thenReturn(transactions)
+    fun `test that the list of sorted transactions is retrieved and saved in the UI state`() =
+        runTest {
+            whenever(getTransactionsByDateUseCase()).thenReturn(transactions)
 
-        initializeUnderTest()
+            initializeUnderTest()
 
-        underTest.uiState.test {
-            assertThat(awaitItem().transactions).isEqualTo(transactions)
+            underTest.uiState.test {
+                assertThat(awaitItem().transactions).isEqualTo(transactions)
+            }
         }
-    }
 
     @Test
     fun `test that the UI state is not updated when there is an error retrieving the list of sorted transactions`() =
@@ -86,4 +87,17 @@ class TransactionsViewModelTest {
                 assertThat(awaitItem().transactions).isEmpty()
             }
         }
+
+    @Test
+    fun `test that the new transaction list scroll state is saved`() = runTest {
+        val scrollState = 100
+        whenever(getTransactionsByDateUseCase()).thenReturn(transactions)
+        initializeUnderTest()
+
+        underTest.saveScrollPosition(scrollState)
+
+        underTest.uiState.test {
+            assertThat(awaitItem().savedScrollPosition).isEqualTo(scrollState)
+        }
+    }
 }
