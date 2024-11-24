@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Transactions</string>
+    <string name="route_title_transactions">Transactions</string>
+    <string name="route_title_transaction_details">Transaction Details</string>
 </resources>
