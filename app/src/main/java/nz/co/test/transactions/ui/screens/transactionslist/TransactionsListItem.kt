@@ -17,13 +17,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import nz.co.test.transactions.domain.entity.Transaction
-import nz.co.test.transactions.ui.screens.utils.formatAmountText
+import nz.co.test.transactions.ui.screens.utils.formatAmountToDisplayText
+import nz.co.test.transactions.ui.screens.utils.formatTransactionDateText
 import nz.co.test.transactions.ui.screens.utils.getAmountTextColor
 import nz.co.test.transactions.ui.theme.ApplicationTheme
 import nz.co.test.transactions.ui.theme.CombinedThemePreviews
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 /**
  * Composable that represents a single item in the Transactions list
@@ -57,7 +57,7 @@ fun TransactionsListItem(
                 )
                 Text(
                     modifier = modifier.testTag(TRANSACTIONS_LIST_ITEM_TRANSACTION_DATE),
-                    text = transaction.transactionDate.format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a")),
+                    text = formatTransactionDateText(transaction.transactionDate),
                     style = MaterialTheme.typography.subtitle2,
                     textAlign = TextAlign.Start,
                 )
@@ -73,7 +73,7 @@ fun TransactionsListItem(
                     .weight(1f)
                     .align(Alignment.CenterVertically)
                     .testTag(TRANSACTIONS_LIST_ITEM_AMOUNT),
-                text = formatAmountText(
+                text = formatAmountToDisplayText(
                     amountToDisplay = amountToDisplay,
                     debit = debitAmount,
                     credit = creditAmount,
