@@ -33,6 +33,21 @@ class TransactionTest {
     }
 
     @Test
+    fun `test that the gst amount is 15 percent of the credit amount when the debit amount is empty`() =
+        runTest {
+            val creditAmount = BigDecimal(3461.35)
+            underTest = Transaction(
+                id = transactionId,
+                transactionDate = transactionDate,
+                summary = transactionSummary,
+                debit = BigDecimal(0.00),
+                credit = creditAmount,
+            )
+
+            assertThat(underTest.gstAmount).isEqualTo(creditAmount.multiply(BigDecimal(0.15)))
+        }
+
+    @Test
     fun `test that the amount to display is debit when the credit amount is empty`() = runTest {
         underTest = Transaction(
             id = transactionId,
@@ -44,6 +59,20 @@ class TransactionTest {
 
         assertThat(underTest.amountToDisplay).isEqualTo(AmountToDisplay.Debit)
     }
+    @Test
+    fun `test that the gst amount is 15 percent of the debit amount when the credit amount is empty`() =
+        runTest {
+            val debitAmount = BigDecimal(3461.35)
+            underTest = Transaction(
+                id = transactionId,
+                transactionDate = transactionDate,
+                summary = transactionSummary,
+                debit = debitAmount,
+                credit = BigDecimal(0.00),
+            )
+
+            assertThat(underTest.gstAmount).isEqualTo(debitAmount.multiply(BigDecimal(0.15)))
+        }
 
     @Test
     fun `test that the amount to display is zero when both credit and debit amounts exist`() =
@@ -58,4 +87,17 @@ class TransactionTest {
 
             assertThat(underTest.amountToDisplay).isEqualTo(AmountToDisplay.Zero)
         }
+
+    @Test
+    fun `test that the gst amount is zero when both credit and debit amounts exist`() = runTest {
+        underTest = Transaction(
+            id = transactionId,
+            transactionDate = transactionDate,
+            summary = transactionSummary,
+            debit = BigDecimal(3461.35),
+            credit = BigDecimal(3461.35),
+        )
+
+        assertThat(underTest.gstAmount).isEqualTo(BigDecimal.ZERO)
+    }
 }
