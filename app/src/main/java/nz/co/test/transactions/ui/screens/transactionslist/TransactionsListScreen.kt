@@ -68,7 +68,7 @@ fun TransactionsListScreen(
  */
 @CombinedThemePreviews
 @Composable
-fun TransactionsListScreenPreview() {
+private fun TransactionsListScreenPreview() {
     val transaction = Transaction(
         id = 1,
         transactionDate = LocalDateTime.of(2021, 8, 31, 15, 47, 10, 0),
