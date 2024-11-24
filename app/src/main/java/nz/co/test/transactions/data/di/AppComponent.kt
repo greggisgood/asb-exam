@@ -1,8 +1,8 @@
-package nz.co.test.transactions.di
+package nz.co.test.transactions.data.di
 
 import dagger.Component
-import nz.co.test.transactions.di.activities.ActivitiesModule
-import nz.co.test.transactions.di.network.NetworkModule
+import nz.co.test.transactions.data.di.activities.ActivitiesModule
+import nz.co.test.transactions.data.di.network.NetworkModule
 import javax.inject.Singleton
 
 @Singleton

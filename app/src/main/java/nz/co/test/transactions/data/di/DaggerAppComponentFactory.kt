@@ -1,10 +1,7 @@
-package nz.co.test.transactions.di
+package nz.co.test.transactions.data.di
 
 import android.app.Activity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.AppComponentFactory
-import androidx.core.app.ComponentActivity
 import javax.inject.Inject
 import javax.inject.Provider
 
