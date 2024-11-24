@@ -1,4 +1,4 @@
-package nz.co.test.transactions.ui
+package nz.co.test.transactions.ui.screens.transactionslist
 
 import androidx.compose.runtime.Immutable
 import nz.co.test.transactions.domain.entity.Transaction

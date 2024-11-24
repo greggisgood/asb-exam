@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nz.co.test.transactions.domain.usecase.GetTransactionsByDateUseCase
-import nz.co.test.transactions.ui.TransactionsUiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class TransactionsListScreenViewModel @Inject constructor(
     private val getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(TransactionsUiState())
+    private val _uiState = MutableStateFlow(TransactionsListScreenUiState())
 
     val uiState = _uiState.asStateFlow()
 
