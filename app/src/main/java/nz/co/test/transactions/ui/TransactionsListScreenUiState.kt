@@ -4,10 +4,10 @@ import androidx.compose.runtime.Immutable
 import nz.co.test.transactions.domain.entity.Transaction
 
 /**
- * Data class representing the UI state of the Transactions screen
+ * Data class representing the UI state of the Transactions list screen
  */
 @Immutable
-data class TransactionsUiState(
+data class TransactionsListScreenUiState(
     val transactions: List<Transaction> = emptyList(),
     val savedScrollPosition: Int = -1,
 )
