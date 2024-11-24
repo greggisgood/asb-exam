@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nz.co.test.transactions.domain.usecase.GetTransactionsUseCase
+import nz.co.test.transactions.domain.usecase.GetTransactionsByDateUseCase
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class TransactionsViewModel @Inject constructor(
-    private val getTransactionsUseCase: GetTransactionsUseCase,
+    private val getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TransactionsUiState())
@@ -24,17 +24,17 @@ class TransactionsViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-        getTransactions()
+        getTransactionsByDate()
     }
 
     /**
      * Retrieves the list of Transactions made by the user. The Transactions are sorted from latest
      * to oldest Transaction date
      */
-    private fun getTransactions() {
+    private fun getTransactionsByDate() {
         viewModelScope.launch {
             runCatching {
-                getTransactionsUseCase()
+                getTransactionsByDateUseCase()
             }.onSuccess { transactions ->
                 _uiState.update { it.copy(transactions = transactions) }
             }.onFailure { exception ->

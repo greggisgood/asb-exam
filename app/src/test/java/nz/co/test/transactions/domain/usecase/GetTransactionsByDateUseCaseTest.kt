@@ -15,18 +15,18 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 /**
- * Test class for [GetTransactionsUseCase]
+ * Test class for [GetTransactionsByDateUseCase]
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class GetTransactionsUseCaseTest {
+class GetTransactionsByDateUseCaseTest {
 
-    private lateinit var underTest: GetTransactionsUseCase
+    private lateinit var underTest: GetTransactionsByDateUseCase
 
     private val transactionsRepository = mock<TransactionRepository>()
 
     @BeforeAll
     fun setUp() {
-        underTest = GetTransactionsUseCase(transactionsRepository)
+        underTest = GetTransactionsByDateUseCase(transactionsRepository)
     }
 
     @BeforeEach
@@ -52,7 +52,7 @@ class GetTransactionsUseCaseTest {
                 credit = BigDecimal.valueOf(0),
             ),
         )
-        whenever(transactionsRepository.getTransactions()).thenReturn(transactions)
+        whenever(transactionsRepository.getTransactionsByDate()).thenReturn(transactions)
 
         assertThat(underTest()).isEqualTo(transactions)
     }

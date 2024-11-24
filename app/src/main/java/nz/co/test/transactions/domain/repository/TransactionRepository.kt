@@ -13,5 +13,5 @@ interface TransactionRepository {
      *
      * @return The list of sorted Transactions
      */
-    suspend fun getTransactions(): List<Transaction>
+    suspend fun getTransactionsByDate(): List<Transaction>
 }

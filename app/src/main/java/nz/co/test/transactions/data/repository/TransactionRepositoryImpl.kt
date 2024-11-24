@@ -15,7 +15,7 @@ class TransactionRepositoryImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : TransactionRepository {
 
-    override suspend fun getTransactions() = withContext(ioDispatcher) {
+    override suspend fun getTransactionsByDate() = withContext(ioDispatcher) {
         transactionsService.getTransactions().sortedByDescending { it.transactionDate }
     }
 }

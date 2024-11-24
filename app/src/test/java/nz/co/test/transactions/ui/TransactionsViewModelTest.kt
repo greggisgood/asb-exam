@@ -9,7 +9,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import nz.co.test.transactions.domain.entity.Transaction
-import nz.co.test.transactions.domain.usecase.GetTransactionsUseCase
+import nz.co.test.transactions.domain.usecase.GetTransactionsByDateUseCase
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -30,7 +30,7 @@ class TransactionsViewModelTest {
 
     private lateinit var underTest: TransactionsViewModel
 
-    private val getTransactionsUseCase = mock<GetTransactionsUseCase>()
+    private val getTransactionsByDateUseCase = mock<GetTransactionsByDateUseCase>()
 
     private val transactions = listOf(
         Transaction(
@@ -52,7 +52,7 @@ class TransactionsViewModelTest {
     @BeforeEach
     fun setDispatcherAndResetMocks() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        reset(getTransactionsUseCase)
+        reset(getTransactionsByDateUseCase)
     }
 
     @AfterEach
@@ -61,12 +61,12 @@ class TransactionsViewModelTest {
     }
 
     private fun initializeUnderTest() {
-        underTest = TransactionsViewModel(getTransactionsUseCase)
+        underTest = TransactionsViewModel(getTransactionsByDateUseCase)
     }
 
     @Test
     fun `test that the list of sorted transactions is retrieved and saved in the UI state`() = runTest {
-        whenever(getTransactionsUseCase()).thenReturn(transactions)
+        whenever(getTransactionsByDateUseCase()).thenReturn(transactions)
 
         initializeUnderTest()
 
@@ -78,7 +78,7 @@ class TransactionsViewModelTest {
     @Test
     fun `test that the UI state is not updated when there is an error retrieving the list of sorted transactions`() =
         runTest {
-            whenever(getTransactionsUseCase()).thenThrow(RuntimeException())
+            whenever(getTransactionsByDateUseCase()).thenThrow(RuntimeException())
 
             assertDoesNotThrow { initializeUnderTest() }
 

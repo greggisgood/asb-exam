@@ -65,6 +65,6 @@ class TransactionRepositoryImplTest {
             whenever(transactionsService.getTransactions()).thenReturn(listOf(transactionOne, transactionTwo))
 
             // The Repository returns the Transactions that are sorted
-            assertThat(underTest.getTransactions()).isEqualTo(listOf(transactionTwo, transactionOne))
+            assertThat(underTest.getTransactionsByDate()).isEqualTo(listOf(transactionTwo, transactionOne))
         }
 }
