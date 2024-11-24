@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import nz.co.test.transactions.domain.entity.Transaction
-import nz.co.test.transactions.ui.TransactionsViewModel
+import nz.co.test.transactions.ui.TransactionsListScreenViewModel
 import nz.co.test.transactions.ui.screens.transactionslist.TransactionsListScreen
 
 /**
@@ -13,7 +13,7 @@ import nz.co.test.transactions.ui.screens.transactionslist.TransactionsListScree
  */
 @Composable
 fun TransactionsListRoute(
-    viewModel: TransactionsViewModel = hiltViewModel(),
+    viewModel: TransactionsListScreenViewModel = hiltViewModel(),
     onTransactionClick: (Transaction) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

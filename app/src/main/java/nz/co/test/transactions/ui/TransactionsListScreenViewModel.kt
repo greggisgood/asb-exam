@@ -12,10 +12,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * The ViewModel for transactions related operations
+ * The ViewModel for the screen displaying the list of Transactions
  */
 @HiltViewModel
-class TransactionsViewModel @Inject constructor(
+class TransactionsListScreenViewModel @Inject constructor(
     private val getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
 ) : ViewModel() {
 

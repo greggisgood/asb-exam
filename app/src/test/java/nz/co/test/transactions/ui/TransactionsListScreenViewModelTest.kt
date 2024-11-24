@@ -22,13 +22,13 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 /**
- * Test class for [TransactionsViewModel]
+ * Test class for [TransactionsListScreenViewModel]
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class TransactionsViewModelTest {
+class TransactionsListScreenViewModelTest {
 
-    private lateinit var underTest: TransactionsViewModel
+    private lateinit var underTest: TransactionsListScreenViewModel
 
     private val getTransactionsByDateUseCase = mock<GetTransactionsByDateUseCase>()
 
@@ -61,7 +61,7 @@ class TransactionsViewModelTest {
     }
 
     private fun initializeUnderTest() {
-        underTest = TransactionsViewModel(getTransactionsByDateUseCase)
+        underTest = TransactionsListScreenViewModel(getTransactionsByDateUseCase)
     }
 
     @Test
