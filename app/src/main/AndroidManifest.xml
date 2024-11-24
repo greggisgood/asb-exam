@@ -19,13 +19,18 @@
 
         <activity
             android:name=".ui.MainActivity"
-            tools:ignore="Instantiatable"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- Declare this Activity to run Instrumented Tests -->
+        <activity
+            android:name="androidx.activity.ComponentActivity"
+            android:exported="true">
+        </activity>
+
+    </application>
 </manifest>
