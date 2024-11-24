@@ -12,8 +12,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.whenever
 import java.math.BigDecimal
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
+import java.time.LocalDateTime
 
 /**
  * Test class for [GetTransactionsUseCase]
@@ -36,38 +35,20 @@ class GetTransactionsUseCaseTest {
     }
 
     @Test
-    fun `test that the list of transactions is retrieved`() = runTest {
+    fun `test that the list of sorted transactions is retrieved`() = runTest {
         val transactions = listOf(
             Transaction(
                 id = 1,
-                transactionDate = OffsetDateTime.of(
-                    2021,
-                    8,
-                    31,
-                    15,
-                    47,
-                    10,
-                    0,
-                    ZoneOffset.ofHours(2)
-                ),
-                summary = "Test Summary 1",
-                debit = BigDecimal.valueOf(9379.55),
+                transactionDate = LocalDateTime.of(2022, 2, 17, 10, 44, 35, 0),
+                summary = "Test Summary 2",
+                debit = BigDecimal.valueOf(3461.35),
                 credit = BigDecimal.valueOf(0),
             ),
             Transaction(
                 id = 1,
-                transactionDate = OffsetDateTime.of(
-                    2022,
-                    2,
-                    17,
-                    10,
-                    44,
-                    35,
-                    0,
-                    ZoneOffset.ofHours(2)
-                ),
-                summary = "Test Summary 2",
-                debit = BigDecimal.valueOf(3461.35),
+                transactionDate = LocalDateTime.of(2021, 8, 31, 15, 47, 10, 0),
+                summary = "Test Summary 1",
+                debit = BigDecimal.valueOf(9379.55),
                 credit = BigDecimal.valueOf(0),
             ),
         )

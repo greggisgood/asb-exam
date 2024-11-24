@@ -16,6 +16,6 @@ class TransactionRepositoryImpl @Inject constructor(
 ) : TransactionRepository {
 
     override suspend fun getTransactions() = withContext(ioDispatcher) {
-        transactionsService.getTransactions()
+        transactionsService.getTransactions().sortedByDescending { it.transactionDate }
     }
 }

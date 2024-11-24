@@ -15,8 +15,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.whenever
 import java.math.BigDecimal
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
+import java.time.LocalDateTime
 
 /**
  * Test class for [TransactionRepositoryImpl]
@@ -43,43 +42,29 @@ class TransactionRepositoryImplTest {
     }
 
     @Test
-    fun `test that the list of transactions are retrieved`() = runTest {
-        val transactions = listOf(
-            Transaction(
+    fun `test that the list of transactions are retrieved and sorted from latest to earliest transaction date`() =
+        runTest {
+            // The oldest Transaction
+            val transactionOne = Transaction(
                 id = 1,
-                transactionDate = OffsetDateTime.of(
-                    2021,
-                    8,
-                    31,
-                    15,
-                    47,
-                    10,
-                    0,
-                    ZoneOffset.ofHours(2)
-                ),
+                transactionDate = LocalDateTime.of(2021, 8, 31, 15, 47, 10, 0),
                 summary = "Test Summary 1",
                 debit = BigDecimal.valueOf(9379.55),
                 credit = BigDecimal.valueOf(0),
-            ),
-            Transaction(
+            )
+            // The latest Transaction
+            val transactionTwo = Transaction(
                 id = 1,
-                transactionDate = OffsetDateTime.of(
-                    2022,
-                    2,
-                    17,
-                    10,
-                    44,
-                    35,
-                    0,
-                    ZoneOffset.ofHours(2)
-                ),
+                transactionDate = LocalDateTime.of(2022, 2, 17, 10, 44, 35, 0),
                 summary = "Test Summary 2",
                 debit = BigDecimal.valueOf(3461.35),
                 credit = BigDecimal.valueOf(0),
-            ),
-        )
-        whenever(transactionsService.getTransactions()).thenReturn(transactions)
+            )
 
-        assertThat(underTest.getTransactions()).isEqualTo(transactions)
-    }
+            // The Service simulates the return of unordered Transactions
+            whenever(transactionsService.getTransactions()).thenReturn(listOf(transactionOne, transactionTwo))
+
+            // The Repository returns the Transactions that are sorted
+            assertThat(underTest.getTransactions()).isEqualTo(listOf(transactionTwo, transactionOne))
+        }
 }

@@ -8,9 +8,10 @@ import nz.co.test.transactions.domain.entity.Transaction
 interface TransactionRepository {
 
     /**
-     * Retrieves the list of Transactions made by the user
+     * Retrieves the list of Transactions made by the user. The list of Transactions are sorted
+     * from latest to oldest transaction date
      *
-     * @return a list of Transactions
+     * @return The list of sorted Transactions
      */
     suspend fun getTransactions(): List<Transaction>
 }

@@ -28,7 +28,8 @@ class TransactionsViewModel @Inject constructor(
     }
 
     /**
-     * Retrieves the list of transactions made by the user
+     * Retrieves the list of Transactions made by the user. The Transactions are sorted from latest
+     * to oldest Transaction date
      */
     private fun getTransactions() {
         viewModelScope.launch {

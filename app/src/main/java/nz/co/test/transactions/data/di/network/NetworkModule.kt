@@ -1,6 +1,7 @@
 package nz.co.test.transactions.data.di.network
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,11 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi {
-        return Moshi.Builder().build()
+        return Moshi.Builder()
+            .add(BigDecimalAdapter())
+            .add(LocalDateTimeAdapter())
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 
     @Provides
