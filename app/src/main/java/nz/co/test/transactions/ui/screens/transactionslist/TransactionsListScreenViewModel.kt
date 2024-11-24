@@ -1,4 +1,4 @@
-package nz.co.test.transactions.ui
+package nz.co.test.transactions.ui.screens.transactionslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nz.co.test.transactions.domain.usecase.GetTransactionsByDateUseCase
+import nz.co.test.transactions.ui.TransactionsUiState
 import timber.log.Timber
 import javax.inject.Inject
 

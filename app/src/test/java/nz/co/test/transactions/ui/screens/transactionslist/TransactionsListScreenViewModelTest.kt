@@ -1,4 +1,4 @@
-package nz.co.test.transactions.ui
+package nz.co.test.transactions.ui.screens.transactionslist
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
